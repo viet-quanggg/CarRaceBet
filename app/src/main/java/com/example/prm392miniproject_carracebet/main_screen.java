@@ -1,10 +1,13 @@
 package com.example.prm392miniproject_carracebet;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +45,10 @@ public class main_screen extends AppCompatActivity {
 
     private double money;
     private TextView tvMoney;
+
+    Dialog addAmountDialog;
+    Button btnAddAmountCancel, btnAddAmount;
+    EditText edtAmountToAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +83,31 @@ public class main_screen extends AppCompatActivity {
         cbCar3 = findViewById(R.id.betCar3);
         cbCar4 = findViewById(R.id.betCar4);
 
+        addAmountDialog = new Dialog(main_screen.this);
+        addAmountDialog.setContentView(R.layout.dialog_addcash);
+        addAmountDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        addAmountDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.add_dialog_bg));
+        addAmountDialog.setCancelable(false);
+
+        btnAddAmountCancel = (Button) addAmountDialog.findViewById(R.id.btnCancelAddAmount);
+        btnAddAmount = (Button) addAmountDialog.findViewById(R.id.btnAddAmount);
+
+        btnAddAmountCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addAmountDialog.dismiss();
+            }
+        });
+
+        btnAddAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtAmountToAdd = (EditText) addAmountDialog.findViewById(R.id.edtAmmount);
+                tvMoney.setText(edtAmountToAdd.getText());
+                addAmountDialog.dismiss();
+                Toast.makeText(main_screen.this, "Money added!", Toast.LENGTH_SHORT).show();
+            }
+        });
         //OnClick Functions
         btnStart.setOnClickListener(new View.OnClickListener() {
             //Confirm before start
@@ -102,8 +134,7 @@ public class main_screen extends AppCompatActivity {
         btnAddCurrency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(main_screen.this, "Add money !", Toast.LENGTH_SHORT).show();
-
+                addAmountDialog.show();
             }
         });
 
