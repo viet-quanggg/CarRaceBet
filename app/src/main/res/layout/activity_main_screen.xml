@@ -111,13 +111,13 @@
 
     <SeekBar
         android:id="@+id/firstCar"
-        android:thumb="@drawable/race_car_1"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
-        android:max="100"
+        android:max="500"
         android:progress="0"
         android:rotation="270"
+        android:thumb="@drawable/race_car_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.486"
@@ -128,7 +128,7 @@
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
-        android:max="100"
+        android:max="500"
         android:progress="0"
         android:rotation="270"
         android:thumb="@drawable/race_car_2"
@@ -139,26 +139,26 @@
 
     <SeekBar
         android:id="@+id/thirdCar"
-        android:thumb="@drawable/race_car_3"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
-        android:max="100"
+        android:max="500"
         android:progress="0"
         android:rotation="270"
+        android:thumb="@drawable/race_car_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <SeekBar
         android:id="@+id/fourthCar"
-        android:thumb="@drawable/race_car_4"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
-        android:max="100"
+        android:max="500"
         android:progress="0"
         android:rotation="270"
+        android:thumb="@drawable/race_car_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
