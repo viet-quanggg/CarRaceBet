@@ -40,7 +40,7 @@
         app:layout_constraintGuide_end="21dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/Account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -67,11 +67,11 @@
         android:text="0 CR"
         android:textColor="@color/white"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/Account"
         app:layout_constraintEnd_toStartOf="@+id/addCurrency"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/Account"
+        app:layout_constraintTop_toTopOf="@+id/Account"
         app:layout_constraintVertical_bias="1.0" />
 
     <View
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="206dp" />
+        app:layout_constraintGuide_percent="0.50121653" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -111,6 +111,7 @@
 
     <SeekBar
         android:id="@+id/firstCar"
+        android:thumb="@drawable/race_car_1"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
@@ -130,6 +131,7 @@
         android:max="100"
         android:progress="0"
         android:rotation="270"
+        android:thumb="@drawable/race_car_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.503"
@@ -137,6 +139,7 @@
 
     <SeekBar
         android:id="@+id/thirdCar"
+        android:thumb="@drawable/race_car_3"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
@@ -149,6 +152,7 @@
 
     <SeekBar
         android:id="@+id/fourthCar"
+        android:thumb="@drawable/race_car_4"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
@@ -158,6 +162,79 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+    <CheckBox
+        android:id="@+id/betCar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:buttonTint="#000000"
+        android:checked="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/firstCar"
+        app:layout_constraintVertical_bias="0.777" />
+
+    <CheckBox
+        android:id="@+id/betCar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:buttonTint="#874CCC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/secondCar"
+        app:layout_constraintVertical_bias="0.777" />
+
+    <CheckBox
+        android:id="@+id/betCar3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:buttonTint="#F27BBD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/thirdCar"
+        app:layout_constraintVertical_bias="0.777" />
+
+    <CheckBox
+        android:id="@+id/betCar4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:buttonTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/fourthCar"
+        app:layout_constraintVertical_bias="0.777" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Start Race"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/Account" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Reset Race"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/tvMoney" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
