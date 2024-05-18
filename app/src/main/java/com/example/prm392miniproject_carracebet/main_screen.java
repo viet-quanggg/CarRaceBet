@@ -3,6 +3,7 @@ package com.example.prm392miniproject_carracebet;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -103,9 +104,13 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 edtAmountToAdd = (EditText) addAmountDialog.findViewById(R.id.edtAmmount);
-                tvMoney.setText(edtAmountToAdd.getText());
-                addAmountDialog.dismiss();
-                Toast.makeText(main_screen.this, "Money added!", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(edtAmountToAdd.getText())) {
+                    edtAmountToAdd.setError("Required");
+                } else {
+                    tvMoney.setText(edtAmountToAdd.getText());
+                    addAmountDialog.dismiss();
+                    Toast.makeText(main_screen.this, "Money added!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         //OnClick Functions
