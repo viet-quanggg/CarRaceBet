@@ -18,17 +18,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/super_brigade"
-            android:text="Enter your cash"
+            android:text="Enter your bet"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/edtBetAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:hint="1000"
-            android:id="@+id/edtAmmount"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -43,10 +44,10 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtAmmount">
+            app:layout_constraintTop_toBottomOf="@+id/edtBetAmount">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCancelAddAmount"
+                android:id="@+id/btnCancelBetAmount"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
@@ -61,7 +62,7 @@
                 app:strokeWidth="2dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddAmount"
+                android:id="@+id/btnAddBetAmount"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
@@ -69,7 +70,7 @@
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/super_brigade"
                 android:padding="12dp"
-                android:text="Add"
+                android:text="Bet"
                 android:textColor="#3A67ED"
                 android:textSize="12sp"
                 app:strokeColor="#3A67ED"
