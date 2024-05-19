@@ -19,24 +19,37 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
+
 public class main_screen extends AppCompatActivity {
 
+    final List<Integer> duration = Collections.synchronizedList(new ArrayList<>());
+    Dialog addAmountDialog;
+    Dialog addBetDialog;
+    Dialog addBetDialog2;
+    Dialog addBetDialog3;
+    Dialog addBetDialog4;
+    Button btnAddAmountCancel, btnAddAmount;
+    EditText edtAmountToAdd;
+    EditText edtBetAmountToAdd;
+    Button btnAddBetAmountCancel, btnAddBetAmount, btnAddBetAmountCancel2, btnAddBetAmount2, btnAddBetAmountCancel3, btnAddBetAmount3, btnAddBetAmountCancel4, btnAddBetAmount4;
     //Buttons
     private Button btnStart;
     private Button btnReset;
-
     //Seekbars
     private SeekBar sbCar1;
     private SeekBar sbCar2;
     private SeekBar sbCar3;
     private SeekBar sbCar4;
-
     //Checkboxes for betting
     private CheckBox cbCar1;
     private CheckBox cbCar2;
     private CheckBox cbCar3;
     private CheckBox cbCar4;
-
     //Add money button
     private View btnAddCurrency;
     private TextView txtCurrency;
@@ -44,24 +57,9 @@ public class main_screen extends AppCompatActivity {
     private TextView txtCar2Bet;
     private TextView txtCar3Bet;
     private TextView txtCar4Bet;
-
-
     private double money;
     private TextView tvMoney;
-
-    Dialog addAmountDialog;
-    Dialog addBetDialog;
-    Dialog addBetDialog2;
-    Dialog addBetDialog3;
-    Dialog addBetDialog4;
-
-    Button btnAddAmountCancel, btnAddAmount;
-    EditText edtAmountToAdd;
-    EditText edtBetAmountToAdd;
-    Button  btnAddBetAmountCancel, btnAddBetAmount
-            ,btnAddBetAmountCancel2, btnAddBetAmount2
-            ,btnAddBetAmountCancel3, btnAddBetAmount3
-            ,btnAddBetAmountCancel4, btnAddBetAmount4;
+    private final Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +95,10 @@ public class main_screen extends AppCompatActivity {
         cbCar3 = findViewById(R.id.betCar3);
         cbCar4 = findViewById(R.id.betCar4);
 
-        txtCar1Bet = (TextView) findViewById(R.id.Car1Bet);
-        txtCar2Bet = (TextView) findViewById(R.id.Car2Bet);
-        txtCar3Bet = (TextView) findViewById(R.id.Car3Bet);
-        txtCar4Bet = (TextView) findViewById(R.id.Car4Bet);
+        txtCar1Bet = findViewById(R.id.Car1Bet);
+        txtCar2Bet = findViewById(R.id.Car2Bet);
+        txtCar3Bet = findViewById(R.id.Car3Bet);
+        txtCar4Bet = findViewById(R.id.Car4Bet);
 
 
         addAmountDialog = new Dialog(main_screen.this);
@@ -134,20 +132,20 @@ public class main_screen extends AppCompatActivity {
         addBetDialog4.setCancelable(false);
 
 
-        btnAddAmountCancel = (Button) addAmountDialog.findViewById(R.id.btnCancelAddAmount);
-        btnAddAmount = (Button) addAmountDialog.findViewById(R.id.btnAddAmount);
+        btnAddAmountCancel = addAmountDialog.findViewById(R.id.btnCancelAddAmount);
+        btnAddAmount = addAmountDialog.findViewById(R.id.btnAddAmount);
 
-        btnAddBetAmountCancel = (Button) addBetDialog.findViewById(R.id.btnCancelBetAmount);
-        btnAddBetAmount = (Button) addBetDialog.findViewById(R.id.btnAddBetAmount);
+        btnAddBetAmountCancel = addBetDialog.findViewById(R.id.btnCancelBetAmount);
+        btnAddBetAmount = addBetDialog.findViewById(R.id.btnAddBetAmount);
 
-        btnAddBetAmountCancel2 = (Button) addBetDialog2.findViewById(R.id.btnCancelBetAmount);
-        btnAddBetAmount2 = (Button) addBetDialog2.findViewById(R.id.btnAddBetAmount);
+        btnAddBetAmountCancel2 = addBetDialog2.findViewById(R.id.btnCancelBetAmount);
+        btnAddBetAmount2 = addBetDialog2.findViewById(R.id.btnAddBetAmount);
 
-        btnAddBetAmountCancel3 = (Button) addBetDialog3.findViewById(R.id.btnCancelBetAmount);
-        btnAddBetAmount3 = (Button) addBetDialog3.findViewById(R.id.btnAddBetAmount);
+        btnAddBetAmountCancel3 = addBetDialog3.findViewById(R.id.btnCancelBetAmount);
+        btnAddBetAmount3 = addBetDialog3.findViewById(R.id.btnAddBetAmount);
 
-        btnAddBetAmountCancel4 = (Button) addBetDialog4.findViewById(R.id.btnCancelBetAmount);
-        btnAddBetAmount4 = (Button) addBetDialog4.findViewById(R.id.btnAddBetAmount);
+        btnAddBetAmountCancel4 = addBetDialog4.findViewById(R.id.btnCancelBetAmount);
+        btnAddBetAmount4 = addBetDialog4.findViewById(R.id.btnAddBetAmount);
 
 
         btnAddAmountCancel.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +158,7 @@ public class main_screen extends AppCompatActivity {
         btnAddAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtAmountToAdd = (EditText) addAmountDialog.findViewById(R.id.edtAmmount);
+                edtAmountToAdd = addAmountDialog.findViewById(R.id.edtAmmount);
                 if (TextUtils.isEmpty(edtAmountToAdd.getText())) {
                     edtAmountToAdd.setError("Required");
                 } else {
@@ -177,8 +175,98 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(main_screen.this, "The race is started !", Toast.LENGTH_SHORT).show();
+                hideUI();
+                CountDownLatch latch = new CountDownLatch(4); // 4 for four cars
+                int max = 500;
+                // Generate random distances for each car
+                new Thread(() -> {
+                    int car1Speed = 1;
+                    int car1Distance = 0;
+                    while (car1Distance < max) {
+                        car1Distance += random.nextInt(Math.min(car1Speed + 2, max));
+                        car1Speed = car1Distance;
+                        try {
+                            Thread.sleep(500); // Delay 100ms
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        final int finalCar1Distance = car1Distance;
+                        runOnUiThread(() -> sbCar1.setProgress(finalCar1Distance));
+                    }
+                    latch.countDown();
+                    duration.add(1);
+                }).start();
 
-            hideUI();
+                new Thread(() -> {
+                    int car2Speed = 1;
+                    int car2Distance = 0;
+                    while (car2Distance < max) {
+                        car2Distance += random.nextInt(Math.min(car2Speed + 2, max));
+                        car2Speed = car2Distance;
+                        try {
+                            Thread.sleep(500); // Delay 100ms
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        final int finalCar2Distance = car2Distance;
+                        runOnUiThread(() -> sbCar2.setProgress(finalCar2Distance));
+                    }
+                    latch.countDown();
+                    duration.add(2);
+
+                }).start();
+
+                new Thread(() -> {
+                    int car3Speed = 1;
+                    int car3Distance = 0;
+                    while (car3Distance < max) {
+                        car3Distance += random.nextInt(Math.min(car3Speed + 2, max));
+                        car3Speed = car3Distance;
+                        try {
+                            Thread.sleep(500); // Delay 100ms
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        final int finalCar3Distance = car3Distance;
+                        runOnUiThread(() -> sbCar3.setProgress(finalCar3Distance));
+                    }
+                    latch.countDown();
+                    duration.add(3);
+
+                }).start();
+
+                new Thread(() -> {
+                    int car4Speed = 1;
+                    int car4Distance = 0;
+                    while (car4Distance < max) {
+                        car4Distance += random.nextInt(Math.min(car4Speed + 2, max));
+                        car4Speed = car4Distance;
+                        try {
+                            Thread.sleep(500); // Delay 100ms
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        final int finalCar4Distance = car4Distance;
+                        runOnUiThread(() -> sbCar4.setProgress(finalCar4Distance));
+                    }
+                    latch.countDown();
+                    duration.add(4);
+
+                }).start();
+
+                new Thread(() -> {
+                    try {
+                        latch.await();
+                        runOnUiThread(() -> {
+                            Toast.makeText(main_screen.this, "Car " + duration.get(0) + " is the winner!", Toast.LENGTH_SHORT).show();
+                            ShowUI();
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
+
             }
         });
 
@@ -187,6 +275,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(main_screen.this, "Reset the game !", Toast.LENGTH_SHORT).show();
+                ResetProgress();
             }
         });
 
@@ -217,17 +306,16 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtBetAmountToAdd = (EditText) addBetDialog.findViewById(R.id.edtBetAmount);
+                edtBetAmountToAdd = addBetDialog.findViewById(R.id.edtBetAmount);
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar1Bet);
-                if(result != 0){
+                if (result != 0) {
                     int curMoney = Integer.parseInt(tvMoney.getText().toString());
                     int afterBet = curMoney - result;
                     tvMoney.setText(String.valueOf(afterBet));
                     addBetDialog.dismiss();
                     txtCar1Bet.setVisibility(View.VISIBLE);
                     cbCar1.setChecked(true);
-                    return;
-                }else{
+                } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -236,7 +324,7 @@ public class main_screen extends AppCompatActivity {
         cbCar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    addBetDialog2.show();
+                addBetDialog2.show();
             }
         });
 
@@ -253,20 +341,18 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmount2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtBetAmountToAdd = (EditText) addBetDialog2.findViewById(R.id.edtBetAmount);
+                edtBetAmountToAdd = addBetDialog2.findViewById(R.id.edtBetAmount);
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar2Bet);
-                if(result != 0){
+                if (result != 0) {
                     tvMoney.setText(String.valueOf(updateCurMoney(tvMoney, result)));
                     addBetDialog2.dismiss();
                     txtCar2Bet.setVisibility(View.VISIBLE);
                     cbCar2.setChecked(true);
-                    return;
-                }else{
+                } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
 
 
         cbCar3.setOnClickListener(new View.OnClickListener() {
@@ -290,15 +376,14 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmount3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtBetAmountToAdd = (EditText) addBetDialog3.findViewById(R.id.edtBetAmount);
+                edtBetAmountToAdd = addBetDialog3.findViewById(R.id.edtBetAmount);
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar3Bet);
-                if(result != 0){
+                if (result != 0) {
                     tvMoney.setText(String.valueOf(updateCurMoney(tvMoney, result)));
                     addBetDialog3.dismiss();
                     txtCar3Bet.setVisibility(View.VISIBLE);
                     cbCar3.setChecked(true);
-                    return;
-                }else{
+                } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -326,26 +411,23 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmount4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtBetAmountToAdd = (EditText) addBetDialog4.findViewById(R.id.edtBetAmount);
+                edtBetAmountToAdd = addBetDialog4.findViewById(R.id.edtBetAmount);
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar4Bet);
-                if(result != 0){
+                if (result != 0) {
                     tvMoney.setText(String.valueOf(updateCurMoney(tvMoney, result)));
                     addBetDialog4.dismiss();
                     cbCar4.setChecked(true);
                     txtCar4Bet.setVisibility(View.VISIBLE);
-                    return;
-                }else{
+                } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
 
-
-
     }
 
-    public void hideUI(){
+    public void hideUI() {
         //Hide buttons
         btnStart.setVisibility(View.INVISIBLE);
         btnReset.setVisibility(View.INVISIBLE);
@@ -361,14 +443,29 @@ public class main_screen extends AppCompatActivity {
 
     }
 
-    public int getBetAmount(EditText inputBet,TextView currentMoney,TextView showBet){
-        if(TextUtils.isEmpty(inputBet.getText().toString())){
+    public void ShowUI() {
+        //Hide buttons
+        btnStart.setVisibility(View.VISIBLE);
+        btnReset.setVisibility(View.VISIBLE);
+        btnAddCurrency.setVisibility(View.VISIBLE);
+        //Hide checkboxes
+        cbCar1.setVisibility(View.VISIBLE);
+        cbCar2.setVisibility(View.VISIBLE);
+        cbCar3.setVisibility(View.VISIBLE);
+        cbCar4.setVisibility(View.VISIBLE);
+        //Hide texts
+        txtCurrency.setVisibility(View.VISIBLE);
+        tvMoney.setVisibility(View.VISIBLE);
+    }
+
+    public int getBetAmount(EditText inputBet, TextView currentMoney, TextView showBet) {
+        if (TextUtils.isEmpty(inputBet.getText().toString())) {
             Toast.makeText(main_screen.this, "Bet can't be empty !", Toast.LENGTH_SHORT).show();
             return 0;
-        }else if(Integer.parseInt(inputBet.getText().toString()) > Integer.parseInt(currentMoney.getText().toString())){
+        } else if (Integer.parseInt(inputBet.getText().toString()) > Integer.parseInt(currentMoney.getText().toString())) {
             Toast.makeText(main_screen.this, "Your bet is larger than your money !", Toast.LENGTH_SHORT).show();
             return 0;
-        }else{
+        } else {
             int betAmount = Integer.parseInt(inputBet.getText().toString());
             showBet.setText(inputBet.getText());
             Toast.makeText(main_screen.this, "Bet for this car is " + betAmount, Toast.LENGTH_SHORT).show();
@@ -376,16 +473,27 @@ public class main_screen extends AppCompatActivity {
         }
     }
 
-    public int updateCurMoney(TextView curMoney, int betAmount){
+    public int updateCurMoney(TextView curMoney, int betAmount) {
         int cur = Integer.parseInt(curMoney.getText().toString());
         return cur - betAmount;
     }
 
-    public int refundBet(TextView curMoney, TextView refundAmount){
+    public int refundBet(TextView curMoney, TextView refundAmount) {
         int cur = Integer.parseInt(curMoney.getText().toString());
         int refund = Integer.parseInt(refundAmount.getText().toString());
         return cur + refund;
     }
 
+    public void ResetProgress() {
+        sbCar1.setProgress(0);
+        sbCar2.setProgress(0);
+        sbCar3.setProgress(0);
+        sbCar4.setProgress(0);
 
+        cbCar1.setChecked(false);
+        cbCar2.setChecked(false);
+        cbCar3.setChecked(false);
+        cbCar4.setChecked(false);
+    }
 }
+
