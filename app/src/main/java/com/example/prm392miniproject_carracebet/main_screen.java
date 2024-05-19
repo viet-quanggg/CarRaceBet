@@ -203,6 +203,7 @@ public class main_screen extends AppCompatActivity {
                 btn_ClickSound.start();
                 bg_music.setVolume(0.4f, 0.4f);
                 car_race_sound.start();
+                duration.clear();
                 Toast.makeText(main_screen.this, "The race is started !", Toast.LENGTH_SHORT).show();
                 hideUI();
                 CountDownLatch latch = new CountDownLatch(4); // 4 for four cars
@@ -222,8 +223,8 @@ public class main_screen extends AppCompatActivity {
                         final int finalCar1Distance = car1Distance;
                         runOnUiThread(() -> sbCar1.setProgress(finalCar1Distance));
                     }
-                    latch.countDown();
                     duration.add(1);
+                    latch.countDown();
                 }).start();
 
                 new Thread(() -> {
@@ -240,9 +241,8 @@ public class main_screen extends AppCompatActivity {
                         final int finalCar2Distance = car2Distance;
                         runOnUiThread(() -> sbCar2.setProgress(finalCar2Distance));
                     }
-                    latch.countDown();
                     duration.add(2);
-
+                    latch.countDown();
                 }).start();
 
                 new Thread(() -> {
@@ -259,9 +259,8 @@ public class main_screen extends AppCompatActivity {
                         final int finalCar3Distance = car3Distance;
                         runOnUiThread(() -> sbCar3.setProgress(finalCar3Distance));
                     }
-                    latch.countDown();
                     duration.add(3);
-
+                    latch.countDown();
                 }).start();
 
                 new Thread(() -> {
@@ -278,9 +277,8 @@ public class main_screen extends AppCompatActivity {
                         final int finalCar4Distance = car4Distance;
                         runOnUiThread(() -> sbCar4.setProgress(finalCar4Distance));
                     }
-                    latch.countDown();
                     duration.add(4);
-
+                    latch.countDown();
                 }).start();
 
                 new Thread(() -> {
@@ -294,8 +292,6 @@ public class main_screen extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }).start();
-
-
             }
         });
 
