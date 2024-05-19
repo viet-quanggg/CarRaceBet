@@ -29,6 +29,7 @@ import java.util.concurrent.CountDownLatch;
 public class main_screen extends AppCompatActivity {
 
     final List<Integer> duration = Collections.synchronizedList(new ArrayList<>());
+    private List<TextView> textViews = Collections.synchronizedList(new ArrayList<>());
     Dialog addAmountDialog;
     Dialog addBetDialog;
     Dialog addBetDialog2;
@@ -169,7 +170,10 @@ public class main_screen extends AppCompatActivity {
         // Khởi tạo âm thanh khi có thông báo
         notification_sound = MediaPlayer.create(this, R.raw.system_noti_sound);
 
-
+        textViews.add(txtCar1Bet);
+        textViews.add(txtCar2Bet);
+        textViews.add(txtCar3Bet);
+        textViews.add(txtCar4Bet);
 
         btnAddAmountCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,8 +289,22 @@ public class main_screen extends AppCompatActivity {
                         runOnUiThread(() -> {
                             Toast.makeText(main_screen.this, "Car " + duration.get(0) + " is the winner!", Toast.LENGTH_SHORT).show();
                             ShowUI();
+
+                            for (int i = 1; i <= duration.size()  ; i++){
+                                if (i == duration.get(0)){
+                                    TextView t = textViews.get(i-1);
+                                    String money = t.getText().toString();
+                                    String oldmoney = tvMoney.getText().toString();
+                                    if (money.isEmpty()){
+                                        money = "0";
+                                    }
+                                    int newmoney = Integer.parseInt(money) + Integer.parseInt(oldmoney);
+                                    tvMoney.setText(String.valueOf(newmoney));
+                                }
+                            }
                             ResetNghi();
                         });
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
