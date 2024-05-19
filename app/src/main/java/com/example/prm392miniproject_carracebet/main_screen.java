@@ -58,7 +58,7 @@ public class main_screen extends AppCompatActivity {
     private TextView txtCar2Bet;
     private TextView txtCar3Bet;
     private TextView txtCar4Bet;
-    private double money;
+    private int money;
     private TextView tvMoney;
     private final Random random = new Random();
     private MediaPlayer bg_music;
@@ -78,10 +78,8 @@ public class main_screen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Tao quăng money qua nha mấy cu
-        // Có gì làm layout tự chỉnh
         Intent intent = getIntent();
-        money = intent.getIntExtra(login_screen.EXTRA_MONEY, 0);
+        money = intent.getIntExtra("EXTRA_MONEY", 0);
 
         tvMoney = findViewById(R.id.tvMoney);
         tvMoney.setText(String.valueOf(money));
