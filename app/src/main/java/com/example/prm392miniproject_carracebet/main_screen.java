@@ -285,6 +285,7 @@ public class main_screen extends AppCompatActivity {
                         runOnUiThread(() -> {
                             Toast.makeText(main_screen.this, "Car " + duration.get(0) + " is the winner!", Toast.LENGTH_SHORT).show();
                             ShowUI();
+                            ResetNghi();
                         });
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -562,6 +563,12 @@ public class main_screen extends AppCompatActivity {
         cbCar2.setChecked(false);
         cbCar3.setChecked(false);
         cbCar4.setChecked(false);
+    }
+    private void ResetNghi(){
+        txtCar1Bet.setText("");
+        txtCar2Bet.setText("");
+        txtCar3Bet.setText("");
+        txtCar4Bet.setText("");
     }
     @Override
     protected void onPause() {
