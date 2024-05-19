@@ -2,6 +2,7 @@ package com.example.prm392miniproject_carracebet;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -60,6 +61,12 @@ public class main_screen extends AppCompatActivity {
     private double money;
     private TextView tvMoney;
     private final Random random = new Random();
+    private MediaPlayer bg_music;
+    private MediaPlayer btn_ClickSound;
+    private MediaPlayer checked_Sound;
+    private MediaPlayer car_race_sound;
+    private MediaPlayer winner_sound;
+    private MediaPlayer notification_sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +155,24 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmount4 = addBetDialog4.findViewById(R.id.btnAddBetAmount);
 
 
+        // Khởi tạo âm thanh nền
+        bg_music = MediaPlayer.create(this, R.raw.background_sound);
+        bg_music.setLooping(true);
+        bg_music.setVolume(0.8f, 0.8f);
+        bg_music.start();
+        // Khởi tạo âm thanh khi click
+        btn_ClickSound = MediaPlayer.create(this, R.raw.button_click_sound);
+        // Khởi tạo âm thanh khi bắt đầu đua xe
+        car_race_sound = MediaPlayer.create(this, R.raw.car_race_sound);
+        // Khởi tạo âm thanh khi chọn xe
+        checked_Sound = MediaPlayer.create(this, R.raw.pick_sound);
+        // Khởi tạo âm thanh khi có người thắng
+        winner_sound = MediaPlayer.create(this, R.raw.winner_sound);
+        // Khởi tạo âm thanh khi có thông báo
+        notification_sound = MediaPlayer.create(this, R.raw.system_noti_sound);
+
+
+
         btnAddAmountCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,6 +190,7 @@ public class main_screen extends AppCompatActivity {
                     tvMoney.setText(edtAmountToAdd.getText());
                     addAmountDialog.dismiss();
                     Toast.makeText(main_screen.this, "Money added!", Toast.LENGTH_SHORT).show();
+                    notification_sound.start();
                 }
             }
         });
@@ -174,6 +200,9 @@ public class main_screen extends AppCompatActivity {
             //Hide all the UIs when the race is started
             @Override
             public void onClick(View v) {
+                btn_ClickSound.start();
+                bg_music.setVolume(0.4f, 0.4f);
+                car_race_sound.start();
                 Toast.makeText(main_screen.this, "The race is started !", Toast.LENGTH_SHORT).show();
                 hideUI();
                 CountDownLatch latch = new CountDownLatch(4); // 4 for four cars
@@ -274,6 +303,7 @@ public class main_screen extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btn_ClickSound.start();
                 Toast.makeText(main_screen.this, "Reset the game !", Toast.LENGTH_SHORT).show();
                 ResetProgress();
             }
@@ -283,6 +313,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addAmountDialog.show();
+                btn_ClickSound.start();
             }
         });
 
@@ -291,6 +322,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addBetDialog.show();
+                checked_Sound.start();
             }
         });
 
@@ -315,8 +347,10 @@ public class main_screen extends AppCompatActivity {
                     addBetDialog.dismiss();
                     txtCar1Bet.setVisibility(View.VISIBLE);
                     cbCar1.setChecked(true);
+                    checked_Sound.start();
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
+                    notification_sound.start();
                 }
             }
         });
@@ -325,6 +359,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addBetDialog2.show();
+                checked_Sound.start();
             }
         });
 
@@ -348,8 +383,10 @@ public class main_screen extends AppCompatActivity {
                     addBetDialog2.dismiss();
                     txtCar2Bet.setVisibility(View.VISIBLE);
                     cbCar2.setChecked(true);
+                    checked_Sound.start();
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
+                    notification_sound.start();
                 }
             }
         });
@@ -358,7 +395,9 @@ public class main_screen extends AppCompatActivity {
         cbCar3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 addBetDialog3.show();
+                checked_Sound.start();
             }
         });
 
@@ -383,8 +422,10 @@ public class main_screen extends AppCompatActivity {
                     addBetDialog3.dismiss();
                     txtCar3Bet.setVisibility(View.VISIBLE);
                     cbCar3.setChecked(true);
+                    checked_Sound.start();
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
+                    notification_sound.start();
                 }
             }
         });
@@ -394,6 +435,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addBetDialog4.show();
+                checked_Sound.start();
             }
         });
 
@@ -417,14 +459,38 @@ public class main_screen extends AppCompatActivity {
                     tvMoney.setText(String.valueOf(updateCurMoney(tvMoney, result)));
                     addBetDialog4.dismiss();
                     cbCar4.setChecked(true);
+                    checked_Sound.start();
                     txtCar4Bet.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
+                    notification_sound.start();
                 }
             }
         });
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (bg_music != null) {
+            bg_music.stop();
+            bg_music.release();
+        }
+        if (btn_ClickSound != null) {
+            btn_ClickSound.release();
+        }
+        if (checked_Sound != null) {
+            checked_Sound.release();
+        }
+        if (car_race_sound != null) {
+            car_race_sound.stop();
+            car_race_sound.release();
+        }
+        if (winner_sound != null) {
+            winner_sound.release();
+        }
     }
 
     public void hideUI() {
@@ -456,14 +522,22 @@ public class main_screen extends AppCompatActivity {
         //Hide texts
         txtCurrency.setVisibility(View.VISIBLE);
         tvMoney.setVisibility(View.VISIBLE);
+        // Stop the car race sound
+        car_race_sound.stop();
+        // Reset the volume of the background sound
+        bg_music.setVolume(1.0f, 1.0f);
+        // Play the winner sound
+        winner_sound.start();
     }
 
     public int getBetAmount(EditText inputBet, TextView currentMoney, TextView showBet) {
         if (TextUtils.isEmpty(inputBet.getText().toString())) {
             Toast.makeText(main_screen.this, "Bet can't be empty !", Toast.LENGTH_SHORT).show();
+            notification_sound.start();
             return 0;
         } else if (Integer.parseInt(inputBet.getText().toString()) > Integer.parseInt(currentMoney.getText().toString())) {
             Toast.makeText(main_screen.this, "Your bet is larger than your money !", Toast.LENGTH_SHORT).show();
+            notification_sound.start();
             return 0;
         } else {
             int betAmount = Integer.parseInt(inputBet.getText().toString());
@@ -494,6 +568,17 @@ public class main_screen extends AppCompatActivity {
         cbCar2.setChecked(false);
         cbCar3.setChecked(false);
         cbCar4.setChecked(false);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (bg_music != null) {
+            bg_music.pause();
+            if (isFinishing()) {
+                bg_music.stop();
+                bg_music.release();
+            }
+        }
     }
 }
 
