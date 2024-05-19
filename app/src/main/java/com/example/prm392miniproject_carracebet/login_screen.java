@@ -19,7 +19,6 @@ public class login_screen extends AppCompatActivity {
     private Button btnLogin;
     private static final String VALID_EMAIL = "user@example.com";
     private static final String VALID_PASSWORD = "password123";
-    public static final String EXTRA_MONEY = "com.example.myapp.MONEY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,7 @@ public class login_screen extends AppCompatActivity {
 
             if (email.equals(VALID_EMAIL) && password.equals(VALID_PASSWORD)) {
                 Intent intent = new Intent(login_screen.this, main_screen.class);
-                intent.putExtra(EXTRA_MONEY, 100);
+                intent.putExtra("EXTRA_MONEY", 100);
                 startActivity(intent);
             } else {
                 Toast.makeText(login_screen.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
