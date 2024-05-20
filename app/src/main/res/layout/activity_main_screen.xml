@@ -117,6 +117,7 @@
         android:max="500"
         android:progress="0"
         android:rotation="270"
+        android:progressDrawable="@android:color/transparent"
         android:thumb="@drawable/race_car_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -132,6 +133,7 @@
         android:progress="0"
         android:rotation="270"
         android:thumb="@drawable/race_car_2"
+        android:progressDrawable="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.503"
@@ -146,6 +148,7 @@
         android:progress="0"
         android:rotation="270"
         android:thumb="@drawable/race_car_3"
+        android:progressDrawable="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -159,6 +162,7 @@
         android:progress="0"
         android:rotation="270"
         android:thumb="@drawable/race_car_4"
+        android:progressDrawable="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
