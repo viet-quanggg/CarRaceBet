@@ -577,6 +577,11 @@ public class main_screen extends AppCompatActivity {
         sbCar3.setProgress(0);
         sbCar4.setProgress(0);
 
+        txtCar1Bet.setText("");
+        txtCar2Bet.setText("");
+        txtCar3Bet.setText("");
+        txtCar4Bet.setText("");
+        
         cbCar1.setChecked(false);
         cbCar2.setChecked(false);
         cbCar3.setChecked(false);
@@ -587,6 +592,11 @@ public class main_screen extends AppCompatActivity {
         txtCar2Bet.setText("");
         txtCar3Bet.setText("");
         txtCar4Bet.setText("");
+
+        cbCar1.setChecked(false);
+        cbCar2.setChecked(false);
+        cbCar3.setChecked(false);
+        cbCar4.setChecked(false);
     }
     @Override
     protected void onPause() {
