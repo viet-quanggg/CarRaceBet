@@ -342,12 +342,17 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmountCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar1Bet)));
-                edtBetAmountToAdd.setText("");
-                addBetDialog.dismiss();
-                cbCar1.setChecked(false);
-                txtCar1Bet.setVisibility(View.INVISIBLE);
-                btnAddBetAmountCancel.setClickable(false);
+                if (!txtCar1Bet.getText().toString().isEmpty()) {
+                    tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar1Bet)));
+                    edtBetAmountToAdd.setText("");
+                    addBetDialog.dismiss();
+                    cbCar1.setChecked(false);
+                    txtCar1Bet.setVisibility(View.INVISIBLE);
+                    txtCar1Bet.setText("");
+                }else {
+                    addBetDialog.dismiss();
+                    cbCar1.setChecked(false);
+                }
             }
         });
         btnAddBetAmount.setOnClickListener(new View.OnClickListener() {
@@ -357,7 +362,8 @@ public class main_screen extends AppCompatActivity {
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar1Bet);
                 if (result != 0) {
                     int curMoney = Integer.parseInt(tvMoney.getText().toString());
-                    int afterBet = curMoney - result;
+                    int moneybet = Integer.parseInt(edtBetAmountToAdd.getText().toString());
+                    int afterBet = curMoney - moneybet;
                     tvMoney.setText(String.valueOf(afterBet));
                     addBetDialog.dismiss();
                     txtCar1Bet.setVisibility(View.VISIBLE);
@@ -382,12 +388,17 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmountCancel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar2Bet)));
-                edtBetAmountToAdd.setText("");
-                addBetDialog2.dismiss();
-                cbCar2.setChecked(false);
-                btnAddBetAmountCancel2.setClickable(false);
-                txtCar2Bet.setVisibility(View.INVISIBLE);
+                if (!txtCar2Bet.getText().toString().isEmpty()) {
+                    tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar2Bet)));
+                    edtBetAmountToAdd.setText("");
+                    addBetDialog2.dismiss();
+                    cbCar2.setChecked(false);
+                    txtCar2Bet.setVisibility(View.INVISIBLE);
+                    txtCar2Bet.setText("");
+                }else {
+                    cbCar2.setChecked(false);
+                    addBetDialog2.dismiss();
+                }
             }
         });
 
@@ -397,7 +408,10 @@ public class main_screen extends AppCompatActivity {
                 edtBetAmountToAdd = addBetDialog2.findViewById(R.id.edtBetAmount);
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar2Bet);
                 if (result != 0) {
-                    tvMoney.setText(String.valueOf(updateCurMoney(tvMoney, result)));
+                    int curMoney = Integer.parseInt(tvMoney.getText().toString());
+                    int moneybet = Integer.parseInt(edtBetAmountToAdd.getText().toString());
+                    int afterBet = curMoney - moneybet;
+                    tvMoney.setText(String.valueOf(afterBet));
                     addBetDialog2.dismiss();
                     txtCar2Bet.setVisibility(View.VISIBLE);
                     cbCar2.setChecked(true);
@@ -422,13 +436,18 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmountCancel3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar3Bet)));
-                edtBetAmountToAdd.setText("");
-                addBetDialog3.dismiss();
-                cbCar3.setChecked(false);
-                btnAddBetAmountCancel3.setClickable(false);
-                txtCar3Bet.setVisibility(View.INVISIBLE);
-
+                if (!txtCar3Bet.getText().toString().isEmpty()) {
+                    tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar3Bet)));
+                    edtBetAmountToAdd.setText("");
+                    addBetDialog3.dismiss();
+                    cbCar3.setChecked(false);
+                    txtCar3Bet.setVisibility(View.INVISIBLE);
+                    txtCar3Bet.setText("");
+                }
+                else {
+                    addBetDialog3.dismiss();
+                    cbCar3.setChecked(false);
+                }
             }
         });
 
@@ -438,7 +457,10 @@ public class main_screen extends AppCompatActivity {
                 edtBetAmountToAdd = addBetDialog3.findViewById(R.id.edtBetAmount);
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar3Bet);
                 if (result != 0) {
-                    tvMoney.setText(String.valueOf(updateCurMoney(tvMoney, result)));
+                    int curMoney = Integer.parseInt(tvMoney.getText().toString());
+                    int moneybet = Integer.parseInt(edtBetAmountToAdd.getText().toString());
+                    int afterBet = curMoney - moneybet;
+                    tvMoney.setText(String.valueOf(afterBet));
                     addBetDialog3.dismiss();
                     txtCar3Bet.setVisibility(View.VISIBLE);
                     cbCar3.setChecked(true);
@@ -463,13 +485,17 @@ public class main_screen extends AppCompatActivity {
         btnAddBetAmountCancel4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar4Bet)));
-                edtBetAmountToAdd.setText("");
-                addBetDialog4.dismiss();
-                btnAddBetAmountCancel4.setClickable(false);
-                cbCar4.setChecked(false);
-                txtCar4Bet.setVisibility(View.INVISIBLE);
-
+                if (!txtCar4Bet.getText().toString().isEmpty()) {
+                    tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar4Bet)));
+                    edtBetAmountToAdd.setText("");
+                    addBetDialog4.dismiss();
+                    cbCar4.setChecked(false);
+                    txtCar4Bet.setVisibility(View.INVISIBLE);
+                    txtCar4Bet.setText("");
+                }else {
+                    addBetDialog4.dismiss();
+                    cbCar4.setChecked(false);
+                }
             }
         });
 
@@ -479,7 +505,10 @@ public class main_screen extends AppCompatActivity {
                 edtBetAmountToAdd = addBetDialog4.findViewById(R.id.edtBetAmount);
                 int result = getBetAmount(edtBetAmountToAdd, tvMoney, txtCar4Bet);
                 if (result != 0) {
-                    tvMoney.setText(String.valueOf(updateCurMoney(tvMoney, result)));
+                    int curMoney = Integer.parseInt(tvMoney.getText().toString());
+                    int moneybet = Integer.parseInt(edtBetAmountToAdd.getText().toString());
+                    int afterBet = curMoney - moneybet;
+                    tvMoney.setText(String.valueOf(afterBet));
                     addBetDialog4.dismiss();
                     cbCar4.setChecked(true);
                     checked_Sound.start();
@@ -565,9 +594,18 @@ public class main_screen extends AppCompatActivity {
             return 0;
         } else {
             int betAmount = Integer.parseInt(inputBet.getText().toString());
-            showBet.setText(inputBet.getText());
-            Toast.makeText(main_screen.this, "Bet for this car is " + betAmount, Toast.LENGTH_SHORT).show();
-            return betAmount;
+            if (!showBet.getText().toString().isEmpty()) {
+                int betCurrent = Integer.parseInt(showBet.getText().toString());
+                int totalBet = betAmount + betCurrent;
+                showBet.setText(String.valueOf(totalBet));
+                Toast.makeText(main_screen.this, "Bet for this car is " + totalBet, Toast.LENGTH_SHORT).show();
+                return totalBet;
+            }else {
+                Toast.makeText(main_screen.this, "Bet for this car is " + betAmount, Toast.LENGTH_SHORT).show();
+                showBet.setText(String.valueOf(betAmount));
+                return betAmount;
+            }
+
         }
     }
 
