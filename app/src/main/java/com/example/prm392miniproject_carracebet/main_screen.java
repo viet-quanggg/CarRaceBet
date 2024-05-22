@@ -343,9 +343,11 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar1Bet)));
+                edtBetAmountToAdd.setText("");
                 addBetDialog.dismiss();
                 cbCar1.setChecked(false);
                 txtCar1Bet.setVisibility(View.INVISIBLE);
+                btnAddBetAmountCancel.setClickable(false);
             }
         });
         btnAddBetAmount.setOnClickListener(new View.OnClickListener() {
@@ -360,6 +362,7 @@ public class main_screen extends AppCompatActivity {
                     addBetDialog.dismiss();
                     txtCar1Bet.setVisibility(View.VISIBLE);
                     cbCar1.setChecked(true);
+                    btnAddBetAmountCancel.setClickable(true);
                     checked_Sound.start();
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
@@ -380,8 +383,10 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar2Bet)));
+                edtBetAmountToAdd.setText("");
                 addBetDialog2.dismiss();
                 cbCar2.setChecked(false);
+                btnAddBetAmountCancel2.setClickable(false);
                 txtCar2Bet.setVisibility(View.INVISIBLE);
             }
         });
@@ -396,6 +401,7 @@ public class main_screen extends AppCompatActivity {
                     addBetDialog2.dismiss();
                     txtCar2Bet.setVisibility(View.VISIBLE);
                     cbCar2.setChecked(true);
+                    btnAddBetAmountCancel2.setClickable(true);
                     checked_Sound.start();
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
@@ -408,7 +414,6 @@ public class main_screen extends AppCompatActivity {
         cbCar3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 addBetDialog3.show();
                 checked_Sound.start();
             }
@@ -418,8 +423,10 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar3Bet)));
+                edtBetAmountToAdd.setText("");
                 addBetDialog3.dismiss();
                 cbCar3.setChecked(false);
+                btnAddBetAmountCancel3.setClickable(false);
                 txtCar3Bet.setVisibility(View.INVISIBLE);
 
             }
@@ -435,6 +442,7 @@ public class main_screen extends AppCompatActivity {
                     addBetDialog3.dismiss();
                     txtCar3Bet.setVisibility(View.VISIBLE);
                     cbCar3.setChecked(true);
+                    btnAddBetAmountCancel3.setClickable(true);
                     checked_Sound.start();
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
@@ -456,7 +464,9 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tvMoney.setText(String.valueOf(refundBet(tvMoney, txtCar4Bet)));
+                edtBetAmountToAdd.setText("");
                 addBetDialog4.dismiss();
+                btnAddBetAmountCancel4.setClickable(false);
                 cbCar4.setChecked(false);
                 txtCar4Bet.setVisibility(View.INVISIBLE);
 
@@ -473,6 +483,7 @@ public class main_screen extends AppCompatActivity {
                     addBetDialog4.dismiss();
                     cbCar4.setChecked(true);
                     checked_Sound.start();
+                    btnAddBetAmountCancel4.setClickable(true);
                     txtCar4Bet.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(main_screen.this, "Error in betting !", Toast.LENGTH_SHORT).show();
